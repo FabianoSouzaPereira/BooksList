@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BooksList</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="capa_do_livro">Capa do Livro</string>
+    <string name="t_tuloclear">Título: - - -</string>
+    <string name="subtituloclear">Subtitulo: - - -</string>
+    <string name="autoresclear">Autores: - - -</string>
+</resources>
