@@ -15,12 +15,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navController.navigateUp()
 
@@ -30,6 +28,10 @@ class MainActivity : AppCompatActivity() {
             )
         )
         onSupportNavigateUp()
+        val toolbar: com.google.android.material.appbar.MaterialToolbar = findViewById(R.id.topAppBar)
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
