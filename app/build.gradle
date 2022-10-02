@@ -4,12 +4,16 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    signingConfigs {
+        release {
+        }
+    }
+    compileSdk 33
 
     defaultConfig {
-        applicationId "br.com.seventh.bookslist"
-        minSdk 26
-        targetSdk 32
+        applicationId 'br.com.fabianospdev.bookslist'
+        minSdk 28
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -17,8 +21,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,22 +41,64 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'br.com.fabianospdev.bookslist'
+    flavorDimensions 'default', 'pro-versions', 'extra-features'
+    productFlavors {
+        free {
+            dimension 'default'
+            applicationId 'br.com.fabianospdev.bookslist'
+            versionCode 1
+            versionName '1.0.0'
+            versionNameSuffix 'free-'
+            targetSdk 33
+            minSdk 28
+            signingConfig signingConfigs.debug
+        }
+        paid {
+            dimension 'default'
+            applicationId 'br.com.fabianospdev.bookslist'
+            versionCode 1
+            versionName '1.0.0'
+            versionNameSuffix 'paid-'
+            targetSdk 33
+            minSdk 28
+        }
+        fullversion {
+            dimension 'pro-versions'
+            applicationId 'br.com.fabianospdev.bookslist'
+            targetSdk 33
+            minSdk 28
+        }
+        selected {
+            dimension 'extra-features'
+            applicationId 'br.com.fabianospdev.bookslist'
+            targetSdk 33
+            minSdk 28
+        }
+    }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
     /* LifeCycle */
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     /* Tests */
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.annotation:annotation:1.5.0'
+
+    /* Retrofit */
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }

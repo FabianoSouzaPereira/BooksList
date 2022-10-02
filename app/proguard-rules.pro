@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#
+# Garante que os novos rastreamentos de stack traces não sejam ambíguos
+-keepattributes LineNumberTable,SourceFile
+-renamesourcefileattribute SourceFile
