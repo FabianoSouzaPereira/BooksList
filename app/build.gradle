@@ -38,6 +38,40 @@ android {
         viewBinding true
     }
     namespace 'br.com.fabianospdev.bookslist'
+    flavorDimensions 'default', 'pro-versions', 'extra-features'
+    productFlavors {
+        free {
+            dimension 'default'
+            applicationId 'br.com.fabianospdev.bookslist'
+            versionCode 1
+            versionName '1.0.0'
+            versionNameSuffix 'free-'
+            targetSdk 33
+            minSdk 28
+            signingConfig signingConfigs.debug
+        }
+        paid {
+            dimension 'default'
+            applicationId 'br.com.fabianospdev.bookslist'
+            versionCode 1
+            versionName '1.0.0'
+            versionNameSuffix 'paid-'
+            targetSdk 33
+            minSdk 28
+        }
+        fullversion {
+            dimension 'pro-versions'
+            applicationId 'br.com.fabianospdev.bookslist'
+            targetSdk 33
+            minSdk 28
+        }
+        selected {
+            dimension 'extra-features'
+            applicationId 'br.com.fabianospdev.bookslist'
+            targetSdk 33
+            minSdk 28
+        }
+    }
 }
 
 dependencies {
