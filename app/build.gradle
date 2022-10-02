@@ -37,7 +37,7 @@ android {
     buildFeatures {
         viewBinding true
     }
-    namespace 'br.com.seventh.bookslist'
+    namespace 'br.com.fabianospdev.bookslist'
 }
 
 dependencies {
