@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">bookslist_paid</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="capa_do_livro">Capa do Livro</string>
+    <string name="t_tuloclear">Título: - - -</string>
+    <string name="subtituloclear">Subtitulo: - - -</string>
+    <string name="autoresclear">Autores: - - -</string>
+    <string name="favorite" translatable="false">favorite</string>
+    <string name="content_description_favorite" translatable="false">content description</string>
+    <string name="search" translatable="false">search</string>
+    <string name="content_description_search" translatable="false">description search</string>
+    <string name="more" translatable="false">more</string>
+    <string name="content_description_more" translatable="false">description more</string>
+</resources>
