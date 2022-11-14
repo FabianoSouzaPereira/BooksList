@@ -2,7 +2,7 @@ package br.com.fabianospdev.bookslist.utils
 
 import androidx.annotation.Keep
 
-
+@Suppress("MemberVisibilityCanBePrivate")
 object Constants {
     @Keep
     const val API_SERVER_NAME = "https://www.googleapis.com/books/"

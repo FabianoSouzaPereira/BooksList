@@ -10,6 +10,7 @@ import br.com.fabianospdev.bookslist.model.book.sale.offers.RetailPrice
 import br.com.fabianospdev.bookslist.model.book.search.SearchInfo
 import br.com.fabianospdev.bookslist.model.book.volume.*
 
+@Suppress("MemberVisibilityCanBePrivate")
 class Shared {
     companion object {
         @JvmStatic
