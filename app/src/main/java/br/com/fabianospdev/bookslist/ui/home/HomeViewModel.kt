@@ -8,8 +8,10 @@ import br.com.fabianospdev.bookslist.BookFactory
 import br.com.fabianospdev.bookslist.model.book.Book
 import br.com.fabianospdev.bookslist.rest.api.ApiManager
 import br.com.fabianospdev.bookslist.rest.api.BookCallBack
+import br.com.fabianospdev.bookslist.rest.api.repository.DefaultRepository
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel@Inject constructor(val repository: DefaultRepository) : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "Biblioteca"

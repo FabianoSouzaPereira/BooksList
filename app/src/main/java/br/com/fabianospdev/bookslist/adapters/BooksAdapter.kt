@@ -47,9 +47,9 @@ class BooksAdapter (context: Context) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title = itemView.findViewById<TextView>(R.id.edtTitle)
-        val subtitle = itemView.findViewById<TextView>(R.id.edtSubTitle)
-        val author = itemView.findViewById<TextView>(R.id.edtAuthor)
+        val title: TextView = itemView.findViewById<TextView>(R.id.edtTitle)
+        val subtitle: TextView = itemView.findViewById<TextView>(R.id.edtSubTitle)
+        val author: TextView = itemView.findViewById<TextView>(R.id.edtAuthor)
     }
 
 }

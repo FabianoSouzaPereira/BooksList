@@ -1,10 +1,14 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
     signingConfigs {
+        debug {
+
+        }
         release {
         }
     }
@@ -37,6 +41,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
     }
     buildFeatures {
         viewBinding true
@@ -46,7 +53,7 @@ android {
     productFlavors {
         free {
             dimension 'default'
-            applicationId 'br.com.fabianospdev.bookslist'
+            applicationId 'br.com.fabianospdev.bookslist_free'
             versionCode 1
             versionName '1.0.0'
             versionNameSuffix 'free-'
@@ -56,7 +63,7 @@ android {
         }
         paid {
             dimension 'default'
-            applicationId 'br.com.fabianospdev.bookslist'
+            applicationId 'br.com.fabianospdev.bookslist_paid'
             versionCode 1
             versionName '1.0.0'
             versionNameSuffix 'paid-'
@@ -65,13 +72,17 @@ android {
         }
         fullversion {
             dimension 'pro-versions'
-            applicationId 'br.com.fabianospdev.bookslist'
+            applicationId 'br.com.fabianospdev.bookslist_full'
+            versionCode 1
+            versionName '1.0.0'
             targetSdk 33
             minSdk 28
         }
         selected {
             dimension 'extra-features'
-            applicationId 'br.com.fabianospdev.bookslist'
+            applicationId 'br.com.fabianospdev.bookslist-selected'
+            versionCode 1
+            versionName '1.0.0'
             targetSdk 33
             minSdk 28
         }
@@ -79,26 +90,29 @@ android {
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    implementation "androidx.core:core-ktx:${rootProject.ext.corektxVersion}"
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatVersion}"
+    implementation "com.google.android.material:material:1.7.0"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.constraintlayoutVersion}"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
     /* LifeCycle */
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.ext.livedataktxVersion}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.ext.viewmodelktxVersion}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.ext.runtimektxVersion}"
     /* Tests */
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test.ext:junit:1.1.4"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.0"
 
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.annotation:annotation:1.5.0'
+    implementation "com.google.android.material:material:1.7.0"
+    implementation "androidx.annotation:annotation:1.5.0"
+
+    /* DAGGER */
+    implementation 'com.google.dagger:dagger:2.44.1'
+    kapt 'com.google.dagger:dagger-compiler:2.44.1'
 
     /* Retrofit */
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.convertergsonVersion}"
 }
