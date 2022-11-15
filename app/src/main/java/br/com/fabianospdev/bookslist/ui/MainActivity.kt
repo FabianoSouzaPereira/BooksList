@@ -1,4 +1,4 @@
-package br.com.fabianospdev.bookslist
+package br.com.fabianospdev.bookslist.ui
 
 import android.content.ComponentName
 import android.content.pm.PackageManager
@@ -6,11 +6,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import br.com.fabianospdev.bookslist.BuildConfig
+import br.com.fabianospdev.bookslist.R
 import br.com.fabianospdev.bookslist.databinding.ActivityMainBinding
-import br.com.fabianospdev.bookslist.ui.NavigationApp
 import br.com.fabianospdev.bookslist.ui.di.MainComponent
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -20,12 +20,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var mainComponent: MainComponent
 
+//    private val navController: NavController by lazy {
+//        findNavController()
+//    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        mainComponent = (appBarConfiguration as NavigationApp).appComponent.mainComponent().create()
-
+        mainComponent = (applicationContext as BookListApplication).appComponent.mainComponent().create()
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        shortAndroidName("MainActivity_One")
+       // shortAndroidName("MainActivity_One")
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navController.navigateUp()
@@ -46,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun shortAndroidName(androidName: String) {
-        desativarAll()
+        desativarAll(androidName)
         if (androidName == "MainActivity_One") {
             packageManager.setComponentEnabledSetting(
                 ComponentName(
@@ -64,24 +69,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun desativarAll() {
+    fun desativarAll(androidName: String) {
+        packageManager.setComponentEnabledSetting(
+            ComponentName(
+                BuildConfig.APPLICATION_ID,
+                "${BuildConfig.APPLICATION_ID}.${androidName}"
+            ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
+        )
+
         packageManager.setComponentEnabledSetting(
             ComponentName(
                 "br.com.fabianospdev.bookslist",
-                "br.com.fabianospdev.bookslist.MainActivity-One"
-            ), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP
+                "${BuildConfig.APPLICATION_ID}.${androidName}"
+            ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
         )
-        packageManager.setComponentEnabledSetting(
-            ComponentName(
-                "br.com.fabianospdev.bookslist",
-                "br.com.fabianospdev.bookslist.MainActivity-Two"
-            ), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP
-        )
+
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+//        return navController.navigateUp(appBarConfiguration)
+//                || super.onSupportNavigateUp()
+//    }
 }

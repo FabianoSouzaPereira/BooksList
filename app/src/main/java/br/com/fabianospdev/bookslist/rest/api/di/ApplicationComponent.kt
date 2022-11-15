@@ -1,11 +1,13 @@
-package br.com.fabianospdev.bookslist.rest.api.data.di
+package br.com.fabianospdev.bookslist.rest.api.di
 
 import android.content.Context
 import br.com.fabianospdev.bookslist.ui.di.MainComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules =  [DataModule::class, ViewModelBuilder::class, SubComponentsModule::class, StringModule::class])
 interface ApplicationComponent {
 

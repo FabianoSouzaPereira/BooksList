@@ -12,10 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fabianospdev.bookslist.MainActivity
 import br.com.fabianospdev.bookslist.adapters.BooksAdapter
 import br.com.fabianospdev.bookslist.databinding.FragmentHomeBinding
 import br.com.fabianospdev.bookslist.model.book.Book
+import br.com.fabianospdev.bookslist.ui.MainActivity
 import br.com.fabianospdev.bookslist.utils.Shared
 import javax.inject.Inject
 
@@ -31,7 +31,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity() as MainActivity).mainComponent
+        (requireActivity() as MainActivity).mainComponent.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

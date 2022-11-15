@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import br.com.fabianospdev.bookslist.MainActivity
 import br.com.fabianospdev.bookslist.databinding.FragmentNotificationsBinding
+import br.com.fabianospdev.bookslist.ui.MainActivity
 import javax.inject.Inject
 
 class NotificationsFragment : Fragment() {
@@ -25,7 +25,7 @@ class NotificationsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity() as MainActivity).mainComponent
+        (requireActivity() as MainActivity).mainComponent.inject(this)
     }
 
     override fun onCreateView(

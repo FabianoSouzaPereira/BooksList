@@ -1,4 +1,4 @@
-package br.com.fabianospdev.bookslist.rest.api.data.di
+package br.com.fabianospdev.bookslist.rest.api.di
 
 import dagger.Module
 import dagger.Provides
