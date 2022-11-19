@@ -37,6 +37,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.supportFragmentManager?.addOnBackStackChangedListener(this)
+
     }
 
     override fun onCreateView(
@@ -58,7 +59,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
             textView.text = it
         }
 
-        viewModel.getBooks().observe( requireActivity(), Observer<List<Book>>{ books ->
+        viewModel.getBooks().observe(requireActivity(), Observer<List<Book>> { books ->
             val list: MutableList<Book> = arrayListOf()
             list.add(Shared.instance.populate)
             adapter.update(list)
@@ -77,7 +78,6 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
     override fun onBackStackChanged() {
 
     }
-
 
 
 }

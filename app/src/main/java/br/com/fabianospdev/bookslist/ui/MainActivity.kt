@@ -25,12 +25,13 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        mainComponent = (applicationContext as BookListApplication).appComponent.mainComponent().create()
+        mainComponent =
+            (applicationContext as BookListApplication).appComponent.mainComponent().create()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       // shortAndroidName("MainActivity_One")
+        // shortAndroidName("MainActivity_One")
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navController.navigateUp()
@@ -41,7 +42,8 @@ class MainActivity : AppCompatActivity() {
             )
         )
         onSupportNavigateUp()
-        val toolbar: com.google.android.material.appbar.MaterialToolbar = findViewById(R.id.topAppBar)
+        val toolbar: com.google.android.material.appbar.MaterialToolbar =
+            findViewById(R.id.topAppBar)
         setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -91,4 +93,7 @@ class MainActivity : AppCompatActivity() {
 //        return navController.navigateUp(appBarConfiguration)
 //                || super.onSupportNavigateUp()
 //    }
+
 }
+
+

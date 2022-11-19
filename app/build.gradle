@@ -109,8 +109,8 @@ dependencies {
     implementation "androidx.annotation:annotation:1.5.0"
 
     /* DAGGER */
-    implementation 'com.google.dagger:dagger:2.44.1'
-    kapt 'com.google.dagger:dagger-compiler:2.44.1'
+    implementation 'com.google.dagger:dagger:2.44.2'
+    kapt 'com.google.dagger:dagger-compiler:2.44.2'
 
     /* Retrofit */
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
