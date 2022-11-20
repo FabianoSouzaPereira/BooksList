@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.fabianospdev.bookslist.R
 import br.com.fabianospdev.bookslist.model.book.Book
 
-class BooksAdapter (context: Context) :
+class BooksAdapter(context: Context) :
     RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
     private val mContext: Context = context
-    private var mListBooks: MutableList<Book?> = arrayListOf()
+    private var mListBooks: MutableList<Book> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -24,11 +24,11 @@ class BooksAdapter (context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
-        val position =  holder.adapterPosition
+        val position = holder.adapterPosition
         val books = mListBooks[position]
-        holder.title.text = books?.volumeInfo?.title
-        holder.subtitle.text = books?.volumeInfo?.subtitle
-        holder.author.text = books?.volumeInfo?.authors.toString()
+        holder.title.text = books.volumeInfo?.title
+        holder.subtitle.text = books.volumeInfo?.subtitle
+        holder.author.text = books.volumeInfo?.authors.toString()
 
         holder.itemView.setOnClickListener {
             Toast.makeText(mContext, "Clicado em lista de livros", Toast.LENGTH_SHORT).show()

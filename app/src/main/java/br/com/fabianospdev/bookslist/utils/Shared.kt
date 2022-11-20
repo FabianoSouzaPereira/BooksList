@@ -1,12 +1,13 @@
 package br.com.fabianospdev.bookslist.utils
 
-import br.com.fabianospdev.bookslist.model.book.Book
+import android.content.ClipData
+import br.com.fabianospdev.bookslist.model.book.Recording
 import br.com.fabianospdev.bookslist.model.book.access.AccessInfo
 import br.com.fabianospdev.bookslist.model.book.access.Epub
 import br.com.fabianospdev.bookslist.model.book.sale.SaleInfo
-import br.com.fabianospdev.bookslist.model.book.sale.offers.ListPrice
 import br.com.fabianospdev.bookslist.model.book.sale.offers.Offers
 import br.com.fabianospdev.bookslist.model.book.sale.offers.RetailPrice
+import br.com.fabianospdev.bookslist.model.book.sale.offers.SaleInfoListPrice
 import br.com.fabianospdev.bookslist.model.book.search.SearchInfo
 import br.com.fabianospdev.bookslist.model.book.volume.*
 
@@ -21,45 +22,50 @@ class Shared {
         instance = this
     }
 
-    var booksList: MutableList<Book> = ArrayList()
+    var booksList: MutableList<ClipData.Item> = ArrayList()
     var authors: Authors = Authors(arrayListOf())
-    var industryIdentifiers: ArrayList<IndustryIdentifiers> = arrayListOf(IndustryIdentifiers(type = "", identifier = ""))
-    var panelizationSummary: PanelizationSummary = PanelizationSummary(containsEpubBubbles = false, containsImageBubbles = false)
+    var industryIdentifiers: ArrayList<IndustryIdentifiers> =
+        arrayListOf(IndustryIdentifiers(type = "", identifier = ""))
+    var panelizationSummary: PanelizationSummary =
+        PanelizationSummary(containsEpubBubbles = false, containsImageBubbles = false)
     var readingModes: ReadingModes = ReadingModes(text = false, image = true)
     var imageLinks: ImageLinks = ImageLinks(smallThumbnail = null, thumbnail = null)
     var offers: Offers = Offers(arrayListOf())
-    var listPrice: ListPrice = ListPrice(amount = 0.0, currencyCode = "")
+    var listPrice: SaleInfoListPrice = SaleInfoListPrice(amount = 0.0, currencyCode = "")
     var retailPrice: RetailPrice = RetailPrice(amount = 0.0, "")
     var epub: Epub = Epub(
         isAvailable = false,
-        acsTokenLink = "",
-        webReaderLink = "",
-        accessViewStatus =  "",
-        quoteSharingAllowed = false
+        acsTokenLink = ""
     )
-    var accessInfo: AccessInfo = AccessInfo(country = "country",
+    var accessInfo: AccessInfo = AccessInfo(
+        country = "country",
         viewability = "viewability",
         embeddable = false,
         publicDomain = false,
         textToSpeechPermission = "",
-        epub = epub
+        epub = epub,
+        pdf = epub,
+        webReaderLink = "",
+        accessViewStatus = "",
+        quoteSharingAllowed = false
     )
     var searchInfo: SearchInfo = SearchInfo(textSnippet = "text")
+    var saleInfoListPrice = SaleInfoListPrice(0.0, "")
     var saleInfo: SaleInfo = SaleInfo(
         country = "",
         saleability = "",
         isEbook = false,
-        listPrice = listPrice,
+        listPrice = saleInfoListPrice,
         retailPrice = retailPrice,
         buyLink = "",
-        offers = offers
+        offers = arrayListOf()
     )
 
 
     val volumeInfo = VolumeInfo(
         title = "title",
         subtitle = "subtitle",
-        authors = authors,
+        authors = arrayListOf(),
         publisher = "publisher",
         publishedDate = "publishedDate",
         description = "description",
@@ -81,16 +87,10 @@ class Shared {
         canonicalVolumeLink = "canonicalVolumeLink"
     )
 
-    val populate = Book(
+
+    var recording = Recording(
         kind = "kind",
-        id = "id",
-        etag = null,
-        selfLink = "selfLink",
-        volumeInfo = volumeInfo,
-        saleInfo = saleInfo,
-        accessInfo = accessInfo,
-        searchInfo = searchInfo
+        totalItems = 0,
+        items = arrayListOf()
     )
-
-
 }

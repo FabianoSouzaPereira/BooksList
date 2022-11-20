@@ -2,9 +2,9 @@ package br.com.fabianospdev.bookslist.model.book.sale.offers
 
 import com.google.gson.annotations.SerializedName
 
-data class RetailPrice(
-    @SerializedName("amount")
-    var amount: Double,
+data class OfferListPrice(
+    @SerializedName("amountInMicros")
+    val amountInMicros: Long,
     @SerializedName("currencyCode")
-    var currencyCode: String
+    val currencyCode: String
 )

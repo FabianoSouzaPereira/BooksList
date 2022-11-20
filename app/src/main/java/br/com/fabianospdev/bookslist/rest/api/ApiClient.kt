@@ -1,26 +1,26 @@
 package br.com.fabianospdev.bookslist.rest.api
 
 import android.content.Context
-import br.com.fabianospdev.bookslist.model.book.Book
+import br.com.fabianospdev.bookslist.model.book.Recording
 
 class ApiClient {
 
     fun getBooks(
         context: Context,
-        accept: String,
-        contentType: String,
         aParam: String,
-        success: (response: List<Book>) -> Unit,
+        success: (response: Recording) -> Unit,
         failure: (error: Error) -> Unit
     ) {
 
-        val call = RetrofitInitializer().userService().getBooks(accept, contentType, aParam)
+        val call = RetrofitInitializer().userService().getBooks(aParam)
 
         call.enqueue(callback({ response ->
 
             if (response?.code() == 200) {
                 success(response.body()!!)
             }
-        }, {}))
+        }, { error ->
+            print(error)
+        }))
     }
 }

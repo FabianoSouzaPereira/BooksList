@@ -1,5 +1,8 @@
 package br.com.fabianospdev.bookslist.model.book.search
 
-data class SearchInfo (
+import com.google.gson.annotations.SerializedName
+
+data class SearchInfo(
+    @SerializedName("textSnippet")
     var textSnippet: String
 )

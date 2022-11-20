@@ -1,6 +1,8 @@
 package br.com.fabianospdev.bookslist.ui.home
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fabianospdev.bookslist.adapters.BooksAdapter
 import br.com.fabianospdev.bookslist.databinding.FragmentHomeBinding
@@ -27,7 +30,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: BooksAdapter
-    val books = Shared.instance.populate
+    val books = Shared.instance.recording.items
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,7 +40,6 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.supportFragmentManager?.addOnBackStackChangedListener(this)
-
     }
 
     override fun onCreateView(
@@ -45,23 +47,28 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         adapter = BooksAdapter(requireContext())
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
         val textView: TextView = binding.textHome
-        val recyclerView: RecyclerView = binding.rvListBooks
-        recyclerView.adapter = adapter
-
+        // textView.background = radialGradientDrawable()
         viewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
 
+        val recyclerView: RecyclerView = binding.rvListBooks
+        recyclerView.background = linearGradientDrawable()
+        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        recyclerView.adapter = adapter
+
         viewModel.getBooks().observe(requireActivity(), Observer<List<Book>> { books ->
             val list: MutableList<Book> = arrayListOf()
-            list.add(Shared.instance.populate)
+
+            for (book in list) {
+                list.add(book)
+            }
+
             adapter.update(list)
             adapter.notifyDataSetChanged()
         })
@@ -77,6 +84,52 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
 
     override fun onBackStackChanged() {
 
+    }
+
+    private fun linearGradientDrawable(): GradientDrawable {
+        return GradientDrawable().apply {
+            colors = intArrayOf(
+                Color.parseColor("#E8F5E9"),
+                Color.parseColor("#E7F4E8"),
+                Color.parseColor("#E8F5E9"),
+                Color.parseColor("#E7F4E8"),
+            )
+            gradientType = GradientDrawable.LINEAR_GRADIENT
+            shape = GradientDrawable.RECTANGLE
+            orientation = GradientDrawable.Orientation.BOTTOM_TOP
+            setStroke(1, Color.parseColor("#4B5320"))
+        }
+    }
+
+    private fun radialGradientDrawable(): GradientDrawable {
+        return GradientDrawable().apply {
+            colors = intArrayOf(
+                Color.parseColor("#DA1884"),
+                Color.parseColor("#FFF600"),
+                Color.parseColor("#800020")
+            )
+            gradientType = GradientDrawable.RADIAL_GRADIENT
+            shape = GradientDrawable.RECTANGLE
+            gradientRadius = 35F
+            setStroke(5, Color.parseColor("#CD5700"))
+        }
+    }
+
+
+    // method to generate sweep gradient drawable
+    private fun sweepGradientDrawable(): GradientDrawable {
+        return GradientDrawable().apply {
+            colors = intArrayOf(
+                Color.parseColor("#DA1884"),
+                Color.parseColor("#FFF600"),
+                Color.parseColor("#800020")
+            )
+            gradientType = GradientDrawable.SWEEP_GRADIENT
+            shape = GradientDrawable.RECTANGLE
+            cornerRadii = floatArrayOf(15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f)
+            cornerRadius = 25f
+            setStroke(5, Color.parseColor("#232B2B"))
+        }
     }
 
 
