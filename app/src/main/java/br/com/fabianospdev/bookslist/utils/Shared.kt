@@ -1,6 +1,6 @@
 package br.com.fabianospdev.bookslist.utils
 
-import android.content.ClipData
+import br.com.fabianospdev.bookslist.model.book.Book
 import br.com.fabianospdev.bookslist.model.book.Recording
 import br.com.fabianospdev.bookslist.model.book.access.AccessInfo
 import br.com.fabianospdev.bookslist.model.book.access.Epub
@@ -22,7 +22,7 @@ class Shared {
         instance = this
     }
 
-    var booksList: MutableList<ClipData.Item> = ArrayList()
+    var booksList: MutableList<Book> = ArrayList()
     var authors: Authors = Authors(arrayListOf())
     var industryIdentifiers: ArrayList<IndustryIdentifiers> =
         arrayListOf(IndustryIdentifiers(type = "", identifier = ""))

@@ -8,5 +8,5 @@ data class Recording(
     @SerializedName("totalItems")
     val totalItems: Long?,
     @SerializedName("items")
-    val items: List<Book>?
+    val items: MutableList<Book>?
 )

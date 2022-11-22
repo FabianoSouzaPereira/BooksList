@@ -1,5 +1,6 @@
 package br.com.fabianospdev.bookslist.model.book
 
+import androidx.lifecycle.LiveData
 import br.com.fabianospdev.bookslist.model.book.access.AccessInfo
 import br.com.fabianospdev.bookslist.model.book.sale.SaleInfo
 import br.com.fabianospdev.bookslist.model.book.search.SearchInfo
@@ -25,7 +26,7 @@ data class Book(
     var accessInfo: AccessInfo?,
     @SerializedName("searchInfo")
     var searchInfo: SearchInfo?
-)
+) : LiveData<Book>()
 
 
 // To parse the JSON, install kotlin's serialization plugin and do:

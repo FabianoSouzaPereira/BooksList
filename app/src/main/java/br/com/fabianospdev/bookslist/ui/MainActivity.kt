@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        (applicationContext as BookListApplication).db.BookDao()
 
         // shortAndroidName("MainActivity_One")
         val navView: BottomNavigationView = binding.navView
@@ -93,8 +94,6 @@ class MainActivity : AppCompatActivity() {
 //        return navController.navigateUp(appBarConfiguration)
 //                || super.onSupportNavigateUp()
 //    }
-
-
 }
 
 

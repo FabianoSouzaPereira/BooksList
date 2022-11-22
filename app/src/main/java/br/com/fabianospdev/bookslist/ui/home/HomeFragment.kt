@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +29,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: BooksAdapter
-    val books = Shared.instance.recording.items
+    val books: MutableList<Book> = Shared.instance.recording.items!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,18 +61,46 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         recyclerView.adapter = adapter
 
-        viewModel.getBooks().observe(requireActivity(), Observer<List<Book>> { books ->
-            val list: MutableList<Book> = arrayListOf()
+//        viewModel.getBooksViewModel().apply {
+//            val list: MutableList<Book> = books
+//
+//            for (book in list) {
+//                list.add(book)
+//            }
+//
+//            adapter.update(list)
+//            adapter.notifyDataSetChanged()
+//        }
+//
+//        viewModel.getBooksViewModel()
+//        return root
+//        viewModel.getBooksViewModel().apply {
+//            val list: MutableList<Book>? = arrayListOf()
+//
+//            if (list != null) {
+//                for (book in list) {
+//                    list.add(book)
+//                }
+//            }
+//
+//            adapter.update(list!!)
+//            adapter.notifyDataSetChanged()
+//        }
+//        viewModel.getBooksViewModel().observe(requireActivity()) { books ->
+//            val list: MutableList<Book>? = arrayListOf()
+//
+//            if (list != null) {
+//                for (book in list) {
+//                    list.add(book)
+//                }
+//            }
+//
+//            adapter.update(list!!)
+//            adapter.notifyDataSetChanged()
+//        }
 
-            for (book in list) {
-                list.add(book)
-            }
 
-            adapter.update(list)
-            adapter.notifyDataSetChanged()
-        })
-
-        viewModel.getBooks()
+        viewModel.getBooksViewModel()
         return root
     }
 

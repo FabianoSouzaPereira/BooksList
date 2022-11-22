@@ -96,11 +96,11 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.constraintlayoutVersion}"
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
-    /* LifeCycle */
+    /******** LifeCycle ********/
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.ext.livedataktxVersion}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.ext.viewmodelktxVersion}"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.ext.runtimektxVersion}"
-    /* Tests */
+    /******** Tests ********/
     testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.4"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.0"
@@ -108,11 +108,20 @@ dependencies {
     implementation "com.google.android.material:material:1.7.0"
     implementation "androidx.annotation:annotation:1.5.0"
 
-    /* DAGGER */
+    /******** DAGGER ********/
     implementation 'com.google.dagger:dagger:2.44.2'
     kapt 'com.google.dagger:dagger-compiler:2.44.2'
 
-    /* Retrofit */
+    /******** Retrofit ********/
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.convertergsonVersion}"
+
+    /******** Room ********/
+    def roomVersion = "2.4.3"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    /* To use Kotlin annotation processing tool (kapt) */
+    kapt("androidx.room:room-compiler:$roomVersion")
+    /* optional - Kotlin Extensions and Coroutines support for Room */
+    implementation("androidx.room:room-ktx:$roomVersion")
 }
