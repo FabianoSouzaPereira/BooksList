@@ -15,9 +15,7 @@ interface BookDao {
     @Query("SELECT * FROM books WHERE uid IN (:BookIds)")
     fun loadAllByIds(BookIds: IntArray): List<Books>
 
-    @Query(
-        "SELECT * FROM books WHERE name LIKE :name LIMIT 1"
-    )
+    @Query("SELECT * FROM books WHERE name LIKE :name LIMIT 1")
     fun findByName(name: String): Books
 
     @Insert

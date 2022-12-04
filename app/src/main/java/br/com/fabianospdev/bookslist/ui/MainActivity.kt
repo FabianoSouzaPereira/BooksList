@@ -1,14 +1,11 @@
 package br.com.fabianospdev.bookslist.ui
 
-import android.content.ComponentName
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import br.com.fabianospdev.bookslist.BuildConfig
 import br.com.fabianospdev.bookslist.R
 import br.com.fabianospdev.bookslist.databinding.ActivityMainBinding
 import br.com.fabianospdev.bookslist.ui.di.MainComponent
@@ -30,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        (applicationContext as BookListApplication).db.BookDao()
+        (applicationContext as BookListApplication).db
 
         // shortAndroidName("MainActivity_One")
         val navView: BottomNavigationView = binding.navView
@@ -53,41 +50,41 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun shortAndroidName(androidName: String) {
-        desativarAll(androidName)
-        if (androidName == "MainActivity_One") {
-            packageManager.setComponentEnabledSetting(
-                ComponentName(
-                    BuildConfig.APPLICATION_ID,
-                    "${BuildConfig.APPLICATION_ID}.${androidName}"
-                ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
-            )
-        } else if (androidName == "MainActivity_Two") {
-            packageManager.setComponentEnabledSetting(
-                ComponentName(
-                    "br.com.fabianospdev.bookslist",
-                    "${BuildConfig.APPLICATION_ID}.${androidName}"
-                ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
-            )
-        }
-    }
+//    fun shortAndroidName(androidName: String) {
+//        desativarAll(androidName)
+//        if (androidName == "MainActivity_One") {
+//            packageManager.setComponentEnabledSetting(
+//                ComponentName(
+//                    BuildConfig.APPLICATION_ID,
+//                    "${BuildConfig.APPLICATION_ID}.${androidName}"
+//                ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
+//            )
+//        } else if (androidName == "MainActivity_Two") {
+//            packageManager.setComponentEnabledSetting(
+//                ComponentName(
+//                    "br.com.fabianospdev.bookslist",
+//                    "${BuildConfig.APPLICATION_ID}.${androidName}"
+//                ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
+//            )
+//        }
+//    }
 
-    fun desativarAll(androidName: String) {
-        packageManager.setComponentEnabledSetting(
-            ComponentName(
-                BuildConfig.APPLICATION_ID,
-                "${BuildConfig.APPLICATION_ID}.${androidName}"
-            ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
-        )
-
-        packageManager.setComponentEnabledSetting(
-            ComponentName(
-                "br.com.fabianospdev.bookslist",
-                "${BuildConfig.APPLICATION_ID}.${androidName}"
-            ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
-        )
-
-    }
+//    fun desativarAll(androidName: String) {
+//        packageManager.setComponentEnabledSetting(
+//            ComponentName(
+//                BuildConfig.APPLICATION_ID,
+//                "${BuildConfig.APPLICATION_ID}.${androidName}"
+//            ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
+//        )
+//
+//        packageManager.setComponentEnabledSetting(
+//            ComponentName(
+//                "br.com.fabianospdev.bookslist",
+//                "${BuildConfig.APPLICATION_ID}.${androidName}"
+//            ), PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
+//        )
+//
+//    }
 
 //    override fun onSupportNavigateUp(): Boolean {
 //        val navController = findNavController(R.id.nav_host_fragment_activity_main)

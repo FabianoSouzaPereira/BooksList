@@ -17,7 +17,7 @@ class ApiClient {
         call.enqueue(callback({ response ->
 
             if (response?.code() == 200) {
-                success(response.body()!!)
+                success(response.body() ?: return@callback)
             }
         }, { error ->
             print(error)
