@@ -1,12 +1,12 @@
 package br.com.fabianospdev.bookslist.rest.api
 
-import android.content.Context
 import br.com.fabianospdev.bookslist.model.book.Recording
+import br.com.fabianospdev.bookslist.ui.home.HomeViewModel
 
 class ApiClient {
 
     fun getBooks(
-        context: Context,
+        context: HomeViewModel,
         aParam: String,
         success: (response: Recording) -> Unit,
         failure: (error: Error) -> Unit

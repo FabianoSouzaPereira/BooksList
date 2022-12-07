@@ -1,16 +1,15 @@
 package br.com.fabianospdev.bookslist.rest.api.repository
 
-import android.content.Context
-import br.com.fabianospdev.bookslist.model.book.Book
 import br.com.fabianospdev.bookslist.model.book.Recording
+import br.com.fabianospdev.bookslist.ui.home.HomeViewModel
 
 interface Repository {
 
     fun login()
     fun getBooks(
-        context: Context,
+        context: HomeViewModel,
         aParam: String,
-        success: (response: Recording) -> MutableList<Book>,
+        success: (response: Recording) -> Unit,
         failure: (error: Error) -> Unit
     )
 }

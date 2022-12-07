@@ -2,10 +2,10 @@ package br.com.fabianospdev.bookslist.rest.api.repository
 
 import android.content.Context
 import android.util.Log
-import br.com.fabianospdev.bookslist.model.book.Book
 import br.com.fabianospdev.bookslist.model.book.Recording
 import br.com.fabianospdev.bookslist.rest.api.RetrofitInitializer
 import br.com.fabianospdev.bookslist.rest.api.callback
+import br.com.fabianospdev.bookslist.ui.home.HomeViewModel
 import javax.inject.Inject
 
 class DefaultRepository @Inject constructor(val context: Context) : Repository {
@@ -14,9 +14,9 @@ class DefaultRepository @Inject constructor(val context: Context) : Repository {
     }
 
     override fun getBooks(
-        context: Context,
+        context: HomeViewModel,
         aParam: String,
-        success: (response: Recording) -> MutableList<Book>,
+        success: (response: Recording) -> Unit,
         failure: (error: Error) -> Unit
     ) {
         val call = RetrofitInitializer().userService().getBooks(aParam)

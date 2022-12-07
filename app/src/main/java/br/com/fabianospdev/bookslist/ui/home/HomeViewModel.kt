@@ -1,45 +1,54 @@
 package br.com.fabianospdev.bookslist.ui.home
 
-import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.fabianospdev.bookslist.R
 import br.com.fabianospdev.bookslist.model.book.Book
 import br.com.fabianospdev.bookslist.rest.api.repository.DefaultRepository
-import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val repository: DefaultRepository) : ViewModel() {
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            loadData()
+        }
+    }
+
     private val _text = MutableLiveData<String>().apply {
         value = repository.context.getString(R.string.library)
     }
     val text: LiveData<String> = _text
 
-    private val _books: MutableLiveData<Book> = MutableLiveData<Book>().also {
-        repository.getBooks(Activity(), repository.context.getString(R.string.flower), {
-            it.items?.toMutableList()!!
-        }, {
-            print(it)
-        })
+    private var _books: MutableLiveData<MutableList<Book>> = MutableLiveData<MutableList<Book>>()
+    val books: LiveData<MutableList<Book>>
+        get() = _books
+
+    private suspend fun loadData() {
+        repository.getBooks(
+            this,
+            repository.context.getString(R.string.flower),
+            {
+                val success = it.items ?: arrayListOf()
+                val books = MutableLiveData<MutableList<Book>>()
+                books.plusAssign(success)
+                _books = books
+            }
+        ) {
+            println(it)
+        }
     }
 
-//    private val _books: MutableLiveData<Book> = MutableLiveData<Book>().observe(this, books){
-//
-//    }
-
-    val books: MutableLiveData<Book> = _books
-
-
-    @JvmName("getBooksViewModel")
-    fun getBooksViewModel(): LiveData<Book> {
-        return books
+    operator fun <T> MutableLiveData<MutableList<T>>.plusAssign(item: MutableList<T>) {
+        val value = this.value ?: mutableListOf()
+        value += item
+        this.value = value
     }
-
-//    @JvmName("getBooksViewModel")
-//    fun getBooksViewModel() {
-//        val books: MutableLiveData<Book?> = MutableLiveData<Book?>()
-//        repository.getBooks(Activity(), "flowers", {}, {})
-//    }
 
 }
+
+
+
