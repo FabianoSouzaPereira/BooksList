@@ -1,14 +1,25 @@
 package br.com.fabianospdev.bookslist.adapters
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fabianospdev.bookslist.R
 import br.com.fabianospdev.bookslist.model.book.Book
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
+
 
 class BooksAdapter(context: Context) :
     RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
@@ -34,6 +45,38 @@ class BooksAdapter(context: Context) :
             Toast.makeText(mContext, "Clicado em lista de livros", Toast.LENGTH_SHORT).show()
         }
 
+        Glide.with(mContext)
+            .asDrawable()
+            .load(books.volumeInfo?.imageLinks ?: R.drawable.outline_error_outline_black_48)
+            .apply(
+                RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop().format(DecodeFormat.DEFAULT)
+                    .error(R.drawable.outline_error_outline_black_48)
+            )
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    p0: GlideException?,
+                    p1: Any?,
+                    p2: Target<Drawable>?,
+                    p3: Boolean
+                ): Boolean {
+                    //  holder.progress.visibility = View.GONE
+                    return true
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    p3: Boolean
+                ): Boolean {
+                    //  holder.progress.visibility = View.GONE
+                    return false
+                }
+            }).into(holder.imageView)
+
     }
 
     override fun getItemCount(): Int {
@@ -50,6 +93,7 @@ class BooksAdapter(context: Context) :
         val title: TextView = itemView.findViewById<TextView>(R.id.edtTitle)
         val subtitle: TextView = itemView.findViewById<TextView>(R.id.edtSubTitle)
         val author: TextView = itemView.findViewById<TextView>(R.id.edtAuthor)
+        val imageView: ImageView = itemView.findViewById(R.id.imgBook)
     }
 
 }

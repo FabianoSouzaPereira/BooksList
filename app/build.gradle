@@ -26,7 +26,9 @@ android {
 
     buildTypes {
         debug {
+            debuggable true
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
@@ -141,4 +143,9 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     /* optional - Kotlin Extensions and Coroutines support for Room */
     implementation("androidx.room:room-ktx:$roomVersion")
+
+    /****  GLIDE  ****/
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+    implementation "com.github.bumptech.glide:okhttp3-integration:4.13.0"
 }

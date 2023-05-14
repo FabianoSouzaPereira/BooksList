@@ -3,7 +3,7 @@ package br.com.fabianospdev.bookslist.model.book.volume
 import com.google.gson.annotations.SerializedName
 
 /* This is in Book */
-class VolumeInfo(
+data class VolumeInfo(
     @SerializedName("title")
     var title: String?,
     @SerializedName("subtitle")

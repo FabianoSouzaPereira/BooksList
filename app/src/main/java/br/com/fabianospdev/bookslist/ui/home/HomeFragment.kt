@@ -72,6 +72,16 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
         return root
     }
 
+    override fun onStart() {
+        super.onStart()
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.notifyDataSetChanged()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.books.removeObservers(viewLifecycleOwner)
