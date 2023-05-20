@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fabianospdev.bookslist.adapters.BooksAdapter
@@ -52,10 +51,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
         val textView: TextView = binding.textHome
-        viewModel.viewModelScope
-        // textView.background = radialGradientDrawable()
         viewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
@@ -65,7 +61,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         recyclerView.adapter = adapter
 
-        viewModel.books.observe(viewLifecycleOwner) {
+        viewModel.getBooks().observe(viewLifecycleOwner) {
             adapter.update(it)
             adapter.notifyDataSetChanged()
         }
@@ -84,7 +80,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.books.removeObservers(viewLifecycleOwner)
+        //  viewModel.books.removeObservers(viewLifecycleOwner)
         _binding = null
     }
 

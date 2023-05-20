@@ -83,7 +83,7 @@ class BooksAdapter(context: Context) :
         return mListBooks.size
     }
 
-    fun update(list: MutableList<Book>) {
+    fun update(list: List<Book>) {
         mListBooks.clear()
         mListBooks.addAll(list)
         notifyDataSetChanged()
@@ -95,5 +95,4 @@ class BooksAdapter(context: Context) :
         val author: TextView = itemView.findViewById<TextView>(R.id.edtAuthor)
         val imageView: ImageView = itemView.findViewById(R.id.imgBook)
     }
-
 }

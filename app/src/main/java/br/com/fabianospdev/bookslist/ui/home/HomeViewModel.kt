@@ -13,9 +13,7 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val repository: DefaultRepository) : ViewModel() {
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            loadData()
-        }
+        loadData()
     }
 
     private val _text = MutableLiveData<String>().apply {
@@ -23,32 +21,42 @@ class HomeViewModel @Inject constructor(private val repository: DefaultRepositor
     }
     val text: LiveData<String> = _text
 
-    private var _books: MutableLiveData<MutableList<Book>> = MutableLiveData<MutableList<Book>>()
-    val books: LiveData<MutableList<Book>>
-        get() = _books
+    private var _books: MutableLiveData<List<Book>> = MutableLiveData()
 
-    private suspend fun loadData() {
-        repository.getBooks(
-            this,
-            repository.context.getString(R.string.flower),
-            {
-                val success = it.items ?: arrayListOf()
-                val books = MutableLiveData<MutableList<Book>>()
-                books.plusAssign(success)
-                _books = books
-            }
-        ) {
-            println(it)
+    fun getBooks(): LiveData<List<Book>> {
+        return _books
+    }
+
+
+    private fun loadData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getBooks(
+                this@HomeViewModel,
+                repository.context.getString(R.string.flower),
+                {
+                    val success = it.items ?: arrayListOf()
+                    val books = MutableLiveData<List<Book>>()
+                    books.plusAssign(success)
+                    _books.value = books.value
+                },
+                {
+                    println(it)
+                }
+            )
         }
     }
 
-    operator fun <T> MutableLiveData<MutableList<T>>.plusAssign(item: MutableList<T>) {
-        val value = this.value ?: mutableListOf()
-        value += item
-        this.value = value
-    }
+//    operator fun <T> MutableLiveData<MutableList<T>>.plusAssign(item: MutableList<T>) {
+//        val value = this.value ?: mutableListOf()
+//        value += item
+//        this.value = value
+//    }
 
 }
 
-
+private fun <T> MutableLiveData<List<T>>.plusAssign(item: MutableList<T>) {
+    var value = this.value ?: mutableListOf()
+    value += item
+    this.value = value
+}
 
