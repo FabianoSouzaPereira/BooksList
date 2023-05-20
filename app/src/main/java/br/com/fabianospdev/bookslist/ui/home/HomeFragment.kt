@@ -21,6 +21,7 @@ import br.com.fabianospdev.bookslist.ui.MainActivity
 import br.com.fabianospdev.bookslist.utils.Shared
 import javax.inject.Inject
 
+
 class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

@@ -12,5 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "BooksList"
+rootProject.name = 'BooksList'
 include ':app'
+include ':shimmer'
+project(':shimmer').projectDir = new File(rootDir, 'shimmer-android/shimmer/')

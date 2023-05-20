@@ -11,7 +11,6 @@ import br.com.fabianospdev.bookslist.databinding.ActivityMainBinding
 import br.com.fabianospdev.bookslist.ui.di.MainComponent
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
