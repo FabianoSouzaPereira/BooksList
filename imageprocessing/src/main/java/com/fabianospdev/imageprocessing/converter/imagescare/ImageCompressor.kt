@@ -1,11 +1,12 @@
-package com.fabianospdev.imageprocessing.converter
+package com.fabianospdev.imageprocessing.converter.imagescare
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import java.io.ByteArrayOutputStream
 
-open class ImageCompressor {
 
+open class ImageCompressor {
+    
     fun compressToBitmap(imagePath: String): Bitmap? {
         val bitmap = BitmapFactory.decodeFile(imagePath)
         return compressBitmap(bitmap)

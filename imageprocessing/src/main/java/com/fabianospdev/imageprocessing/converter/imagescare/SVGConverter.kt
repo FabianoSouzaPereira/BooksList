@@ -1,4 +1,4 @@
-package com.fabianospdev.imageprocessing.converter
+package com.fabianospdev.imageprocessing.converter.imagescare
 
 import android.graphics.Bitmap
 import com.caverock.androidsvg.SVG

@@ -29,25 +29,25 @@ android {
         jvmTarget = '11'
     }
 
-    publishing {
-        publications {
-            create("imageprocessing", MavenPublication) {
-                groupId = 'com.fabianospdev.imageprocessing'
-                artifactId = 'imageprocessing'
-                version = '1.0.0'
-
-                from components.release
-
-                // Configurações adicionais, se necessário
-
-                // Configuração para tornar as classes visíveis no projeto principal
-                artifact(sourceJar) {
-                    builtBy(sourceJar)
-                    classifier = 'sources'
-                }
-            }
-        }
-    }
+//    publishing {
+//        publications {
+//            create('imageprocessing', MavenPublication) {
+//                groupId = 'com.fabianospdev.imageprocessing'
+//                artifactId = 'imageprocessing'
+//                version = '1.0.0'
+//
+//                from components.release
+//
+//                // Configurações adicionais, se necessário
+//
+//                // Configuração para tornar as classes visíveis no projeto principal
+//                artifact(sourceJar) {
+//                    builtBy(sourceJar)
+//                    classifier = 'sources'
+//                }
+//            }
+//        }
+//    }
 }
 
 dependencies {

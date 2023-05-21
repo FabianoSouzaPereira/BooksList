@@ -19,7 +19,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-
+import com.fabianospdev.imageprocessing.converter.ImageProcessor
 
 class BooksAdapter(context: Context) :
     RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
@@ -72,8 +72,11 @@ class BooksAdapter(context: Context) :
                     dataSource: DataSource?,
                     p3: Boolean
                 ): Boolean {
-                    //  holder.progress.visibility = View.GONE
-                    resource.let {  }
+                    val image = object: ImageProcessor {
+                        override fun imageCompressor(image: String): Bitmap? {
+                            return super.imageCompressor(image)
+                        }
+                    }
                     return false
                 }
             }).into(holder.imageView)
