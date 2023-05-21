@@ -40,7 +40,7 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.supportFragmentManager?.addOnBackStackChangedListener(this)
-
+        
     }
 
     override fun onCreateView(
@@ -56,13 +56,17 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
         viewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-
+        val shimmerFragment = binding.ShimmerFragment
+        shimmerFragment.visibility = View.VISIBLE
         val recyclerView: RecyclerView = binding.rvListBooks
+        recyclerView.visibility = View.GONE
         recyclerView.background = linearGradientDrawable()
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         recyclerView.adapter = adapter
 
         viewModel.getBooks().observe(viewLifecycleOwner) {
+            shimmerFragment.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
             adapter.update(it)
             adapter.notifyDataSetChanged()
         }
