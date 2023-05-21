@@ -1,7 +1,7 @@
 package br.com.fabianospdev.bookslist.adapters
 
 import android.content.Context
-import android.graphics.drawable.Drawable
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,19 +46,19 @@ class BooksAdapter(context: Context) :
         }
 
         Glide.with(mContext)
-            .asDrawable()
-            .load(books.volumeInfo?.imageLinks ?: R.drawable.outline_error_outline_black_48)
+            .asBitmap()
+            .load(books.volumeInfo?.imageLinks ?: R.drawable.outline_highlight_off_black_48)
             .apply(
                 RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop().format(DecodeFormat.DEFAULT)
                     .error(R.drawable.outline_error_outline_black_48)
             )
-            .listener(object : RequestListener<Drawable> {
+            .listener(object : RequestListener<Bitmap> {
                 override fun onLoadFailed(
                     p0: GlideException?,
                     p1: Any?,
-                    p2: Target<Drawable>?,
+                    p2: Target<Bitmap>?,
                     p3: Boolean
                 ): Boolean {
                     //  holder.progress.visibility = View.GONE
@@ -66,13 +66,14 @@ class BooksAdapter(context: Context) :
                 }
 
                 override fun onResourceReady(
-                    resource: Drawable?,
+                    resource: Bitmap?,
                     model: Any?,
-                    target: Target<Drawable>?,
+                    target: Target<Bitmap>?,
                     dataSource: DataSource?,
                     p3: Boolean
                 ): Boolean {
                     //  holder.progress.visibility = View.GONE
+                    resource.let {  }
                     return false
                 }
             }).into(holder.imageView)
