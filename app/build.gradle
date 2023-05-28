@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId 'br.com.fabianospdev.bookslist'
-        minSdk 28
+        minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -60,7 +60,7 @@ android {
             versionName '1.0.0'
             versionNameSuffix 'free-'
             targetSdk 33
-            minSdk 28
+            minSdk 29
             signingConfig signingConfigs.debug
         }
         paid {
@@ -70,7 +70,7 @@ android {
             versionName '1.0.0'
             versionNameSuffix 'paid-'
             targetSdk 33
-            minSdk 28
+            minSdk 29
         }
         fullversion {
             dimension 'pro-versions'
@@ -78,7 +78,7 @@ android {
             versionCode 1
             versionName '1.0.0'
             targetSdk 33
-            minSdk 28
+            minSdk 29
         }
         selected {
             dimension 'extra-features'
@@ -86,7 +86,7 @@ android {
             versionCode 1
             versionName '1.0.0'
             targetSdk 33
-            minSdk 28
+            minSdk 29
         }
     }
     buildToolsVersion '33.0.0'
