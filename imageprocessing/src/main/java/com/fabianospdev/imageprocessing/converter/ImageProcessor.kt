@@ -9,4 +9,8 @@ interface ImageProcessor {
     fun imageCompressor(image: String): Bitmap? {
         return ImageCompressor().compressToBitmap(image)
     }
+
+    fun imageCompressor(image: ByteArray): Bitmap? {
+        return ImageCompressor().compressToBitmap(image)
+    }
 }

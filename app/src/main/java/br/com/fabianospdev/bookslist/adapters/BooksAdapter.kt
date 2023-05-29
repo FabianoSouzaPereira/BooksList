@@ -1,7 +1,7 @@
 package br.com.fabianospdev.bookslist.adapters
 
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,20 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.fabianospdev.bookslist.R
 import br.com.fabianospdev.bookslist.model.book.Book
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
-import com.fabianospdev.imageprocessing.converter.ImageProcessor
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.fabianospdev.imageprocessing.converter.imagescare.ImageCompressor
+import com.fabianospdev.imageprocessing.converter.utils.ImageDownloadTask
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import java.io.File
 
 class BooksAdapter(context: Context) :
     RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
     private val mContext: Context = context
     private var mListBooks: MutableList<Book> = arrayListOf()
-
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(mContext)
@@ -44,44 +45,30 @@ class BooksAdapter(context: Context) :
         holder.itemView.setOnClickListener {
             Toast.makeText(mContext, "Clicado em lista de livros", Toast.LENGTH_SHORT).show()
         }
-
+    
         Glide.with(mContext)
-            .asBitmap()
-            .load(books.volumeInfo?.imageLinks ?: R.drawable.outline_highlight_off_black_48)
+            .downloadOnly()
+            .load(books.volumeInfo?.imageLinks?.thumbnail)
             .apply(
                 RequestOptions()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop().format(DecodeFormat.DEFAULT)
-                    .error(R.drawable.outline_error_outline_black_48)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .onlyRetrieveFromCache(true)
+                    .error(android.R.drawable.presence_offline)
             )
-            .listener(object : RequestListener<Bitmap> {
-                override fun onLoadFailed(
-                    p0: GlideException?,
-                    p1: Any?,
-                    p2: Target<Bitmap>?,
-                    p3: Boolean
-                ): Boolean {
-                    //  holder.progress.visibility = View.GONE
-                    return true
+            .into(object : CustomTarget<File>() {
+                override fun onResourceReady(resource: File, transition: Transition<in File>?) {
+                    val bitmap = ImageCompressor().compressToBitmap(resource.path)
+                    holder.imageView.setImageBitmap(bitmap)
                 }
-
-                override fun onResourceReady(
-                    resource: Bitmap?,
-                    model: Any?,
-                    target: Target<Bitmap>?,
-                    dataSource: DataSource?,
-                    p3: Boolean
-                ): Boolean {
-                    val image = object: ImageProcessor {
-                        override fun imageCompressor(image: String): Bitmap? {
-                            return super.imageCompressor(image)
-                        }
-                    }
-                    return false
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    ImageDownloadTask(holder.imageView).execute(books.volumeInfo?.imageLinks?.thumbnail)
                 }
-            }).into(holder.imageView)
-
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+            })
+        
     }
+
 
     override fun getItemCount(): Int {
         return mListBooks.size
