@@ -1,3 +1,9 @@
+/*  
+* This pack imagescare provide resources to work with images PNG, JPEG,JPG and SVG.
+* 
+* 
+*/
+
 package com.fabianospdev.imageprocessing.converter.imagescare
 
 import android.content.Context
@@ -17,11 +23,11 @@ class SVGConverter {
         return try {
             when(svgImage){
                 is String -> {
-                    val svg = loadSVGFromFile(svgImage)
-                    return convertSVGToBitmap(svg)
+                    val svg = loadSVGFromFile(svgFilePath = svgImage)
+                    return convertSVGToBitmap(svg = svg)
                 }
                 is SVG -> {
-                    return convertSVGToBitmap(svgImage)
+                    return convertSVGToBitmap(svg = svgImage)
                 }
                 else -> {
                     println("Type is not supported!")

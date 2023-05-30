@@ -16,18 +16,18 @@ import java.io.File
 
 class ImageCompressor {
     fun compressToBitmap(context: Context, image: Any?): Bitmap? {
-        return compressToBitmap2(context, image)
+        return compressToBitmap2(context = context, image = image)
     }
     
     private fun compressToBitmap2(context: Context, image: Any?): Bitmap? {
         return try {
             when (image) {
                 is ByteArray -> {
-                    val compressedBytes = extractByteArray(image)
+                    val compressedBytes = extractByteArray(any = image)
                     BitmapFactory.decodeByteArray(compressedBytes, 0, compressedBytes!!.size)
                 }
                 is String -> {
-                    val imagePath = extractImagePath(image)
+                    val imagePath = extractImagePath(any = image)
                     BitmapFactory.decodeFile(imagePath)
                 }
                 is File -> {
