@@ -4,7 +4,7 @@
 * 
 */
 
-package com.fabianospdev.imageprocessing.converter.imagescare
+package com.fabianospdev.imageprocessing.converter.core
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -14,7 +14,7 @@ import com.fabianospdev.imageprocessing.R
 import java.io.File
 import java.io.FileInputStream
 
-class SVGConverter {
+internal class SVGConverter {
     
     fun convertToBitmap(context: Context, image: Any): Bitmap? {
         return anyToBitmap(context = context, svgImage = image)

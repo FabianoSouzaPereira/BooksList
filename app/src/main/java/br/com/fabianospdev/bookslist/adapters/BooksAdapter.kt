@@ -16,8 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.fabianospdev.imageprocessing.converter.ImageProcessorImpl
-import com.fabianospdev.imageprocessing.converter.utils.ImageDownloadTask
+import com.fabianospdev.imageprocessing.converter.converter.ImageProcessorImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import java.io.File
@@ -60,8 +59,8 @@ class BooksAdapter(context: Context) :
                     val bitmap = ImageProcessorImpl().imageCompressor(mContext, resource)
                     holder.imageView.setImageBitmap(bitmap)
                 }
-                override fun onLoadFailed(errorDrawable: Drawable?) {
-                    ImageDownloadTask(holder.imageView).execute(books.volumeInfo?.imageLinks?.thumbnail)
+                override fun onLoadFailed(errorDrawable: Drawable?) { 
+                    ImageProcessorImpl().imageDownloadTask(mContext, holder.imageView,books.volumeInfo?.imageLinks?.thumbnail ?: "")
                 }
                 override fun onLoadCleared(placeholder: Drawable?) {
                 }

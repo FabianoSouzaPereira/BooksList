@@ -1,4 +1,4 @@
-/*  
+package com.fabianospdev.imageprocessing.converter.core/*  
 * This pack imagescare provide resources to work with images PNG, JPEG,JPG and SVG.
 * 
 * 
@@ -10,11 +10,10 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import com.caverock.androidsvg.SVG
 import com.fabianospdev.imageprocessing.R
-import com.fabianospdev.imageprocessing.converter.imagescare.SVGConverter
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-class ImageCompressor {
+internal class ImageCompressor {
     fun compressToBitmap(context: Context, image: Any?): Bitmap? {
         return compressToBitmap2(context = context, image = image)
     }
