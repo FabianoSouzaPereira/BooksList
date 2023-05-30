@@ -1,3 +1,9 @@
+/*  
+* This pack imagescare provide resources to work with images PNG, JPEG,JPG and SVG.
+* 
+* 
+*/
+
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -10,6 +16,10 @@ import java.io.File
 
 class ImageCompressor {
     fun compressToBitmap(context: Context, image: Any?): Bitmap? {
+        return compressToBitmap2(context, image)
+    }
+    
+    private fun compressToBitmap2(context: Context, image: Any?): Bitmap? {
         return try {
             when (image) {
                 is ByteArray -> {
@@ -21,18 +31,18 @@ class ImageCompressor {
                     BitmapFactory.decodeFile(imagePath)
                 }
                 is File -> {
-                    val imageFile = extractImageFile(image)
+                    val imageFile = extractImageFile(any = image)
                     BitmapFactory.decodeFile(imageFile)
                 }
                 is Bitmap -> {
-                    val bitmap = extractBitmap(image)
+                    val bitmap = extractBitmap(any = image)
                     val outputStream = ByteArrayOutputStream()
                     bitmap?.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
                     val compressedBytes = outputStream.toByteArray()
                     BitmapFactory.decodeByteArray(compressedBytes, 0, compressedBytes.size)
                 }
                 is SVG -> {
-                    SVGConverter().convertToBitmap(image)
+                    SVGConverter().convertToBitmap(context = context, image = image)
                 }
                 else -> {
                     println("Type is not supported!")

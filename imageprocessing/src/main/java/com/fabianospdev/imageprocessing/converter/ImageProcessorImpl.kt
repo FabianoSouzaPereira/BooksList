@@ -10,6 +10,6 @@ import android.graphics.Bitmap
 
 class ImageProcessorImpl : ImageProcessor {
     override fun imageCompressor(context: Context, image: Any): Bitmap? {
-        return super.imageCompressor(context,image)
+        return super.imageCompressor(context = context, image = image)
     }
 }

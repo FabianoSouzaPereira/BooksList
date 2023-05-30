@@ -1,27 +1,36 @@
 package com.fabianospdev.imageprocessing.converter.imagescare
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import com.caverock.androidsvg.SVG
+import com.fabianospdev.imageprocessing.R
 import java.io.File
 import java.io.FileInputStream
 
 class SVGConverter {
-    fun convertToBitmap(image: Any): Bitmap? {
-        return anyToBitmap(image)
+    
+    fun convertToBitmap(context: Context, image: Any): Bitmap? {
+        return anyToBitmap(context = context, svgImage = image)
     }
-    private fun anyToBitmap(svgImage: Any): Bitmap? {
-        return when(svgImage){
-            is String -> {
-                val svg = loadSVGFromFile(svgImage)
-                return convertSVGToBitmap(svg)
+    private fun anyToBitmap(context: Context,svgImage: Any): Bitmap? {
+        return try {
+            when(svgImage){
+                is String -> {
+                    val svg = loadSVGFromFile(svgImage)
+                    return convertSVGToBitmap(svg)
+                }
+                is SVG -> {
+                    return convertSVGToBitmap(svgImage)
+                }
+                else -> {
+                    println("Type is not supported!")
+                    null
+                }
             }
-            is SVG -> {
-               return convertSVGToBitmap(svgImage)
-            }
-            else -> {
-                println("Type is not supported!")
-                null
-            }
+        } catch (e: Exception) {
+            val errorBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.errorconvert)
+            errorBitmap
         }
     }
 
