@@ -2,15 +2,12 @@
 
 package com.fabianospdev.imageprocessing.converter
 
+import ImageCompressor
+import android.content.Context
 import android.graphics.Bitmap
-import com.fabianospdev.imageprocessing.converter.imagescare.ImageCompressor
 
 interface ImageProcessor {
-    fun imageCompressor(image: String): Bitmap? {
-        return ImageCompressor().compressToBitmap(image)
-    }
-
-    fun imageCompressor(image: ByteArray): Bitmap? {
-        return ImageCompressor().compressToBitmap(image)
+    fun imageCompressor(context: Context, image: Any): Bitmap? {
+        return ImageCompressor().compressToBitmap(context,image)
     }
 }

@@ -16,7 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.fabianospdev.imageprocessing.converter.imagescare.ImageCompressor
+import com.fabianospdev.imageprocessing.converter.ImageProcessorImpl
 import com.fabianospdev.imageprocessing.converter.utils.ImageDownloadTask
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -57,7 +57,7 @@ class BooksAdapter(context: Context) :
             )
             .into(object : CustomTarget<File>() {
                 override fun onResourceReady(resource: File, transition: Transition<in File>?) {
-                    val bitmap = ImageCompressor().compressToBitmap(resource.path)
+                    val bitmap = ImageProcessorImpl().imageCompressor(mContext, resource)
                     holder.imageView.setImageBitmap(bitmap)
                 }
                 override fun onLoadFailed(errorDrawable: Drawable?) {
@@ -66,7 +66,6 @@ class BooksAdapter(context: Context) :
                 override fun onLoadCleared(placeholder: Drawable?) {
                 }
             })
-        
     }
 
 

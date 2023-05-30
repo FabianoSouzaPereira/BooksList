@@ -6,9 +6,23 @@ import java.io.File
 import java.io.FileInputStream
 
 class SVGConverter {
-    fun convertToBitmap(svgFilePath: String): Bitmap? {
-        val svg = loadSVGFromFile(svgFilePath)
-        return convertSVGToBitmap(svg)
+    fun convertToBitmap(image: Any): Bitmap? {
+        return anyToBitmap(image)
+    }
+    private fun anyToBitmap(svgImage: Any): Bitmap? {
+        return when(svgImage){
+            is String -> {
+                val svg = loadSVGFromFile(svgImage)
+                return convertSVGToBitmap(svg)
+            }
+            is SVG -> {
+               return convertSVGToBitmap(svgImage)
+            }
+            else -> {
+                println("Type is not supported!")
+                null
+            }
+        }
     }
 
     private fun loadSVGFromFile(svgFilePath: String): SVG? {
