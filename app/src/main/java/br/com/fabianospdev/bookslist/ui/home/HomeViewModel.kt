@@ -26,8 +26,7 @@ class HomeViewModel @Inject constructor(private val repository: DefaultRepositor
     fun getBooks(): LiveData<List<Book>> {
         return _books
     }
-
-
+    
     private fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getBooks(

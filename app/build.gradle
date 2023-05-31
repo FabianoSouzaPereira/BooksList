@@ -16,11 +16,11 @@ android {
 
     defaultConfig {
         applicationId 'br.com.fabianospdev.bookslist'
-        minSdk 28
+        minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        useLibrary  'org.apache.http.legacy'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -60,7 +60,7 @@ android {
             versionName '1.0.0'
             versionNameSuffix 'free-'
             targetSdk 33
-            minSdk 28
+            minSdk 29
             signingConfig signingConfigs.debug
         }
         paid {
@@ -70,7 +70,7 @@ android {
             versionName '1.0.0'
             versionNameSuffix 'paid-'
             targetSdk 33
-            minSdk 28
+            minSdk 29
         }
         fullversion {
             dimension 'pro-versions'
@@ -78,7 +78,7 @@ android {
             versionCode 1
             versionName '1.0.0'
             targetSdk 33
-            minSdk 28
+            minSdk 29
         }
         selected {
             dimension 'extra-features'
@@ -86,23 +86,23 @@ android {
             versionCode 1
             versionName '1.0.0'
             targetSdk 33
-            minSdk 28
+            minSdk 29
         }
     }
+    buildToolsVersion '33.0.0'
 }
 
 dependencies {
     def lifecycle_version = "2.6.0-alpha03"
     def arch_version = "2.1.0"
     
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.core:core-ktx:${rootProject.ext.corektxVersion}"
     implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatVersion}"
     implementation "com.google.android.material:material:1.7.0"
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.constraintlayoutVersion}"
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
-
-
     /******** LifeCycle ********/
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.ext.livedataktxVersion}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.ext.viewmodelktxVersion}"
@@ -125,8 +125,7 @@ dependencies {
     implementation "androidx.annotation:annotation:1.5.0"
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:$arch_version"
-
-
+    
     /******** DAGGER ********/
     implementation 'com.google.dagger:dagger:2.44.2'
     kapt 'com.google.dagger:dagger-compiler:2.44.2'
@@ -148,4 +147,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     implementation "com.github.bumptech.glide:okhttp3-integration:4.13.0"
+
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    implementation project(':imageprocessing')
 }
