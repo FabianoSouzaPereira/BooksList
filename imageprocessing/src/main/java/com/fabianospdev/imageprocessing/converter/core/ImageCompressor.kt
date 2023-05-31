@@ -19,7 +19,6 @@ internal class ImageCompressor {
     }
     
     private fun compressToBitmap2(context: Context, image: Any?): Bitmap? {
-        println("compressToBitmap2")
         return try {
             when (image) {
                 is ByteArray -> {
