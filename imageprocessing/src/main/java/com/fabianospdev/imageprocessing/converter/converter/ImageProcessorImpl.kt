@@ -1,6 +1,6 @@
 /* 
 *  Implementation ImageProcessor to convert some images types to bitmap.
-*  Between formats accessible are JPEG, JPG, PNG, SVG
+*  Between formats accessible are JPEG, JPG, PNG, SVG e WEBP
 */
 
 package com.fabianospdev.imageprocessing.converter.converter

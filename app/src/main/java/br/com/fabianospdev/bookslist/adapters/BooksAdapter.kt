@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.fabianospdev.bookslist.R
 import br.com.fabianospdev.bookslist.model.book.Book
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.fabianospdev.imageprocessing.converter.converter.ImageProcessorImpl
@@ -48,12 +46,6 @@ class BooksAdapter(context: Context) :
         Glide.with(mContext)
             .downloadOnly()
             .load(books.volumeInfo?.imageLinks?.thumbnail)
-            .apply(
-                RequestOptions()
-                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .onlyRetrieveFromCache(true)
-                    .error(android.R.drawable.presence_offline)
-            )
             .into(object : CustomTarget<File>() {
                 override fun onResourceReady(resource: File, transition: Transition<in File>?) {
                     val bitmap = ImageProcessorImpl().imageCompressor(mContext, resource)
