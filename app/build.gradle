@@ -20,8 +20,13 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        useLibrary  'org.apache.http.legacy'
+        useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -95,7 +100,7 @@ android {
 dependencies {
     def lifecycle_version = "2.6.0-alpha03"
     def arch_version = "2.1.0"
-    
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.core:core-ktx:${rootProject.ext.corektxVersion}"
     implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatVersion}"
@@ -125,6 +130,7 @@ dependencies {
     implementation "androidx.annotation:annotation:1.5.0"
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:$arch_version"
+    implementation 'org.robolectric:robolectric:4.10.3'
     
     /******** DAGGER ********/
     implementation 'com.google.dagger:dagger:2.44.2'

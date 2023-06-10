@@ -42,7 +42,7 @@ class BooksAdapter(context: Context) :
         holder.itemView.setOnClickListener {
             Toast.makeText(mContext, "Clicado em lista de livros", Toast.LENGTH_SHORT).show()
         }
-    
+
         Glide.with(mContext)
             .downloadOnly()
             .load(books.volumeInfo?.imageLinks?.thumbnail)
@@ -51,14 +51,19 @@ class BooksAdapter(context: Context) :
                     val bitmap = ImageProcessorImpl().imageCompressor(mContext, resource)
                     holder.imageView.setImageBitmap(bitmap)
                 }
-                override fun onLoadFailed(errorDrawable: Drawable?) { 
-                    ImageProcessorImpl().imageDownloadTask(mContext, holder.imageView,books.volumeInfo?.imageLinks?.thumbnail ?: "")
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    ImageProcessorImpl().imageDownloadTask(
+                        mContext,
+                        holder.imageView,
+                        books.volumeInfo?.imageLinks?.thumbnail ?: ""
+                    )
                 }
+
                 override fun onLoadCleared(placeholder: Drawable?) {
                 }
             })
     }
-
 
     override fun getItemCount(): Int {
         return mListBooks.size

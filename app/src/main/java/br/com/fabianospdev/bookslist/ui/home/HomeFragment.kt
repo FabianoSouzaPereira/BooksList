@@ -40,13 +40,13 @@ class HomeFragment : Fragment(), FragmentManager.OnBackStackChangedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.supportFragmentManager?.addOnBackStackChangedListener(this)
-        
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         adapter = BooksAdapter(requireContext())
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
