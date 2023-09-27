@@ -20,13 +20,13 @@ class HomeViewModel @Inject constructor(private val repository: DefaultRepositor
         value = repository.context.getString(R.string.library)
     }
     val text: LiveData<String> = _text
-
+    
     private var _books: MutableLiveData<List<Book>> = MutableLiveData()
 
     fun getBooks(): LiveData<List<Book>> {
         return _books
     }
-    
+
     private fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getBooks(
